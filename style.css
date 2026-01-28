@@ -8,6 +8,15 @@
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
+:root.dark-mode {
+    --background-color: #121212;
+    --container-background: #1e1e1e;
+    --primary-color: #bb86fc;
+    --secondary-color: #03dac6;
+    --text-color: #e0e0e0;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--background-color);
@@ -17,6 +26,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -25,6 +35,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 20px var(--shadow-color);
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 h1 {
@@ -36,3 +47,26 @@ lotto-machine {
     display: block;
     margin: 0 auto;
 }
+
+.theme-switcher-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+#theme-switcher {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--container-background);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#theme-switcher:hover {
+    background-color: var(--primary-color);
+    color: var(--container-background);
+}
+

@@ -13,8 +13,26 @@ class LottoMachine extends HTMLElement {
         drawButton.setAttribute('class', 'draw-button');
         drawButton.textContent = 'Draw Numbers';
 
-        const style = document.createElement('style');
-        style.textContent = `
+        this.styleElement = document.createElement('style');
+
+        shadow.appendChild(this.styleElement);
+        shadow.appendChild(wrapper);
+        wrapper.appendChild(numberDisplay);
+        wrapper.appendChild(drawButton);
+
+        drawButton.addEventListener('click', () => this.drawNumbers(numberDisplay));
+
+        this.drawInitialNumbers(numberDisplay);
+    }
+
+    connectedCallback() {
+        this.updateStyles();
+        window.addEventListener('theme-changed', () => this.updateStyles());
+    }
+
+    updateStyles() {
+        const computedStyle = getComputedStyle(document.documentElement);
+        this.styleElement.textContent = `
             .lotto-machine {
                 display: flex;
                 flex-direction: column;
@@ -35,33 +53,24 @@ class LottoMachine extends HTMLElement {
                 font-size: 1.5rem;
                 font-weight: bold;
                 color: white;
-                background-color: var(--primary-color);
-                box-shadow: 0 4px 8px var(--shadow-color);
+                background-color: ${computedStyle.getPropertyValue('--primary-color')};
+                box-shadow: 0 4px 8px ${computedStyle.getPropertyValue('--shadow-color')};
             }
             .draw-button {
                 padding: 10px 20px;
                 font-size: 1.2rem;
                 color: white;
-                background-color: var(--secondary-color);
+                background-color: ${computedStyle.getPropertyValue('--secondary-color')};
                 border: none;
                 border-radius: 8px;
                 cursor: pointer;
-                box-shadow: 0 4px 8px var(--shadow-color);
+                box-shadow: 0 4px 8px ${computedStyle.getPropertyValue('--shadow-color')};
                 transition: background-color 0.3s;
             }
             .draw-button:hover {
                 background-color: #45a049;
             }
         `;
-
-        shadow.appendChild(style);
-        shadow.appendChild(wrapper);
-        wrapper.appendChild(numberDisplay);
-        wrapper.appendChild(drawButton);
-
-        drawButton.addEventListener('click', () => this.drawNumbers(numberDisplay));
-
-        this.drawInitialNumbers(numberDisplay);
     }
 
     drawInitialNumbers(display) {
@@ -95,3 +104,22 @@ class LottoMachine extends HTMLElement {
 }
 
 customElements.define('lotto-machine', LottoMachine);
+
+const themeSwitcher = document.getElementById('theme-switcher');
+const root = document.documentElement;
+
+themeSwitcher.addEventListener('click', () => {
+    root.classList.toggle('dark-mode');
+    localStorage.setItem('theme', root.classList.contains('dark-mode') ? 'dark' : 'light');
+    window.dispatchEvent(new CustomEvent('theme-changed'));
+});
+
+function loadTheme() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+        root.classList.add('dark-mode');
+    }
+    window.dispatchEvent(new CustomEvent('theme-changed'));
+}
+
+loadTheme();
