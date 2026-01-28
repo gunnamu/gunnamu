@@ -108,9 +108,18 @@ customElements.define('lotto-machine', LottoMachine);
 const themeSwitcher = document.getElementById('theme-switcher');
 const root = document.documentElement;
 
+function updateThemeSwitcherText() {
+    if (root.classList.contains('dark-mode')) {
+        themeSwitcher.textContent = '화이트모드';
+    } else {
+        themeSwitcher.textContent = '블랙모드';
+    }
+}
+
 themeSwitcher.addEventListener('click', () => {
     root.classList.toggle('dark-mode');
     localStorage.setItem('theme', root.classList.contains('dark-mode') ? 'dark' : 'light');
+    updateThemeSwitcherText(); // Update button text after toggling
     window.dispatchEvent(new CustomEvent('theme-changed'));
 });
 
@@ -119,6 +128,7 @@ function loadTheme() {
     if (theme === 'dark') {
         root.classList.add('dark-mode');
     }
+    updateThemeSwitcherText(); // Set initial button text
     window.dispatchEvent(new CustomEvent('theme-changed'));
 }
 
