@@ -49,3 +49,26 @@ body {
     box-shadow: 0 10px 20px var(--shadow-color);
 }
 
+.animal-test-link-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.animal-test-button {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    color: white;
+    background-color: var(--primary-color); /* 주 색상 사용 */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: background-color 0.3s;
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.animal-test-button:hover {
+    background-color: #3a7bd2; /* 주 색상보다 약간 어둡게 */
+}
+
