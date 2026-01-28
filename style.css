@@ -27,7 +27,7 @@ body {
     align-items: center; /* 변경: 가로 중앙 정렬 */
     min-height: 100vh;
     margin: 0;
-    padding-top: 2rem; /* 상단 여백 추가 */
+    padding-top: 80px; /* 상단 여백 추가 */
     padding-bottom: 2rem; /* 하단 여백 추가 */
     box-sizing: border-box; /* 패딩이 너비/높이에 포함되도록 */
     transition: background-color 0.3s, color 0.3s;
@@ -70,5 +70,76 @@ body {
 
 .animal-test-button:hover {
     background-color: #3a7bd2; /* 주 색상보다 약간 어둡게 */
+}
+
+/* Navigation Bar */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--container-background);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    margin-top: 3rem;
+    padding: 2rem 1rem;
+    background-color: var(--container-background);
+    border-top: 1px solid var(--shadow-color);
+    text-align: center;
+    color: var(--text-color);
+}
+
+footer .footer-links {
+    margin-bottom: 1rem;
+}
+
+footer .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 0.75rem;
+    transition: color 0.3s;
+}
+
+footer .footer-links a:hover {
+    color: var(--primary-color);
+}
+
+footer .copyright {
+    font-size: 0.9rem;
 }
 
