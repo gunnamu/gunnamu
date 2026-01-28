@@ -25,7 +25,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .animal-test-container button {
+        #image-upload-button {
             padding: 1rem 1.5rem;
             font-size: 1.2rem;
             color: white;
@@ -38,15 +38,31 @@
             margin-bottom: 1rem;
         }
 
-        .animal-test-container button:hover {
+        #image-upload-button:hover {
             background-color: #45a049;
         }
 
-        #webcam-container {
+        #image-upload {
+            display: none; /* 실제 input은 숨김 */
+        }
+
+        #image-preview-container {
             margin-top: 1rem;
-            border: 2px solid var(--primary-color);
+            width: 300px;
+            height: 300px;
+            border: 2px dashed var(--primary-color);
             border-radius: 8px;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color);
+        }
+
+        #image-preview {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
         }
 
         #label-container {
@@ -63,8 +79,12 @@
 <body>
     <div class="animal-test-container">
         <h1>강아지 고양이 동물상 테스트</h1>
-        <button type="button" onclick="init()">테스트 시작</button>
-        <div id="webcam-container"></div>
+        <p>얼굴 사진을 업로드하여 동물상을 확인해보세요!</p>
+        <label for="image-upload" id="image-upload-button">이미지 업로드</label>
+        <input type="file" id="image-upload" accept="image/*">
+        <div id="image-preview-container">
+            <img id="image-preview" src="" alt="업로드된 이미지 미리보기">
+        </div>
         <div id="label-container"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -72,45 +92,50 @@
     <script type="text/javascript">
         const URL = "https://teachablemachine.withgoogle.com/models/jeNMD3RpW/";
 
-        let model, webcam, labelContainer, maxPredictions;
+        let model, labelContainer, maxPredictions;
 
-        async function init() {
+        // 모델 로드 함수
+        async function initModel() {
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
 
             model = await tmImage.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
 
-            const flip = true;
-            webcam = new tmImage.Webcam(200, 200, flip);
-            await webcam.setup();
-            await webcam.play();
-            window.requestAnimationFrame(loop);
-
-            document.getElementById("webcam-container").innerHTML = ''; // 기존 내용 지우기
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
-            
             labelContainer = document.getElementById("label-container");
-            labelContainer.innerHTML = ''; // 기존 내용 지우기
             for (let i = 0; i < maxPredictions; i++) {
                 labelContainer.appendChild(document.createElement("div"));
             }
         }
 
-        async function loop() {
-            webcam.update();
-            await predict();
-            window.requestAnimationFrame(loop);
-        }
-
-        async function predict() {
-            const prediction = await model.predict(webcam.canvas);
+        // 이미지 예측 함수
+        async function predict(imageElement) {
+            const prediction = await model.predict(imageElement);
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                     prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(2) + "%";
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
         }
+
+        // 파일 업로드 처리
+        const imageUpload = document.getElementById("image-upload");
+        const imagePreview = document.getElementById("image-preview");
+
+        imageUpload.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.onload = () => predict(imagePreview);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 페이지 로드 시 모델 초기화
+        window.onload = initModel;
     </script>
 </body>
 </html>
