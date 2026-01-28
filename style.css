@@ -70,3 +70,66 @@ lotto-machine {
     color: var(--container-background);
 }
 
+.contact-form-container {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: var(--container-background);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px var(--shadow-color);
+    text-align: left;
+}
+
+.contact-form-container h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.contact-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form-container label {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.contact-form-container input[type="text"],
+.contact-form-container input[type="email"],
+.contact-form-container textarea {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: border-color 0.3s;
+}
+
+.contact-form-container input[type="text"]:focus,
+.contact-form-container input[type="email"]:focus,
+.contact-form-container textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.contact-form-container button[type="submit"] {
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    color: white;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: background-color 0.3s;
+    align-self: center; /* 폼 가운데 정렬 */
+    width: fit-content; /* 내용에 맞춰 너비 조절 */
+}
+
+.contact-form-container button[type="submit"]:hover {
+    background-color: #45a049; /* 기존 버튼 호버 색상과 유사하게 */
+}
+
