@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto Number Drawer</title>
+    <!-- Google AdSense Start -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6174754313706109"
+         crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6174754313706109">
+    <!-- Google AdSense End -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZVKTF64KG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1ZVKTF64KG');
+</script>
+</head>
+<body>
+    <nav>
+        <a href="index_ko.html" class="logo">Lotto & Animal</a> <!-- 한국어 버전으로 이동하는 링크 추가 -->
+        <ul>
+            <li><a href="index_en.html">Home</a></li>
+            <li><a href="animal_test_en.html">Animal Face Test</a></li>
+            <li><a href="blog_en.html">Blog</a></li>
+            <li><a href="about_en.html">About</a></li>
+        </ul>
+        <div class="lang-switcher">
+            <a href="index_ko.html">한국어</a> | <span>English</span>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Lotto Number Drawing</h1>
+        <div class="theme-switcher-container">
+            <button id="theme-switcher">Toggle Theme</button> <!-- main.js에서 텍스트 업데이트 예정 -->
+        </div>
+        <lotto-machine></lotto-machine>
+
+        <div class="animal-test-link-container">
+            <a href="animal_test_en.html" class="animal-test-button">Go to Animal Face Test</a>
+        </div>
+
+        <div class="latest-blog-posts-container">
+            <h2>Latest Blog Posts</h2>
+            <div class="blog-post-item">
+                <h3><a href="blog-post-1_en.html">Lotto First Place Strategy? Statistical Analysis!</a></h3>
+                <span class="date">January 28, 2024</span>
+                <p>Is winning the lottery purely luck? Or can statistical approaches increase your chances? This article analyzes past winning numbers...</p>
+            </div>
+            <div class="blog-post-item">
+                <h3><a href="blog-post-2_en.html">Dog Face or Cat Face? Features and Physiognomic Meanings</a></h3>
+                <span class="date">January 29, 2024</span>
+                <p>The popular dog face/cat face test! What features determine your animal face, and what are their physiognomic meanings...</p>
+            </div>
+            <a href="blog_en.html" class="view-all-posts">View All Posts</a>
+        </div>
+
+        <div class="contact-form-container">
+            <h2>Partnership Inquiry</h2>
+            <form action="https://formspree.io/f/mnjvavyj" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Submit Inquiry</button>
+            </form>
+        </div>
+    </div>
+    <div class="disqus-container">
+        <div id="disqus_thread"></div>
+    </div>
+    <script>
+        var disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = 'lotto-machine-page-en'; // 영어 페이지용 고유 식별자
+        };
+        (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://gunnamu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script src="main.js"></script>
+    <footer>
+        <div class="footer-links">
+            <a href="about_en.html">About</a>
+            <a href="privacy_en.html">Privacy Policy</a>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Your Site Name. All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
